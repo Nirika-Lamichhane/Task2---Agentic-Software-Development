@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: classicmodels_db
+    
+    # Loads the variables like POSTGRES_USER from your .env file
+    env_file:
+      - .env
+    
+    # Using variables from .env to configure the database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    
+    ports:
+      - "5432:5432"
+    
+    volumes:
+      # Initial data script
+      - ./seed.sql:/docker-entrypoint-initdb.d/seed.sql
+      
+      # Corrected path: removed '/data' to avoid the version/structure error
+      - postgres_data:/var/lib/postgresql
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
