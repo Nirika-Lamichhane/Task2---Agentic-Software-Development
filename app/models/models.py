@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, TEXT, Numeric, ForeignKey, Date, SmallInteger
-from database import Base
+from app.db.database import Base
 
 
 class Customer(Base):
@@ -61,5 +61,3 @@ class OrderDetail(Base):
     # Primary Key is composite: ("orderNumber", "productCode")
     orderNumber = Column(Integer, ForeignKey("orders.orderNumber"), primary_key=True)
     productCode = Column(String(15), ForeignKey("products.productCode"), primary_key=True)
-    
-

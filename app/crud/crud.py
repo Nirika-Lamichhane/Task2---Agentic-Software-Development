@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-import models, schemas
-from logger import get_logger
+from app.models import models
+from app import schemas
+from app.config.logger import get_logger
 
 logger = get_logger("crud")
 

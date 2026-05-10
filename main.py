@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 
-import models
-import database
-from router import router
-from logger import get_logger
+from app.db.database import engine, Base
+from app.models import models
+from app.routers.router import router
+from app.config.logger import get_logger
 
 logger = get_logger("main")
 
@@ -11,7 +11,7 @@ logger = get_logger("main")
 app = FastAPI(title="ClassicModels Customer API", version="0.1.0")
 
 # Database initialization
-models.Base.metadata.create_all(bind=database.engine)
+Base.metadata.create_all(bind=engine)
 
 app.include_router(router)
 

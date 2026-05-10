@@ -4,7 +4,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy.pool import NullPool
 from dotenv import load_dotenv
 from urllib.parse import quote_plus
-from logger import get_logger
+from app.config.logger import get_logger
 
 logger = get_logger("database")
 

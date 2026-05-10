@@ -1,12 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List, Dict
-import crud, schemas, database
-from logger import get_logger
+from app import crud
+from app import schemas
+from app.db import database
+from app.config.logger import get_logger
 import time
 import asyncio
 from fastapi.concurrency import run_in_threadpool
-from database import SessionLocal
+from app.db.database import SessionLocal
 
 
 def get_count_safely(count_function):
@@ -153,11 +155,11 @@ def update_customer(customer_id: int, customer: schemas.CustomerUpdate, db: Sess
         raise HTTPException(status_code=404, detail="Customer not found")
     return updated_customer
 
-@router.delete("/customers/{customer_id}", response_model=schemas.CustomerOut)
+@router.delete("/customers/{customer_id}")
 def delete_customer(customer_id: int, db: Session = Depends(database.get_db)):
     logger.info(f"API Request: Delete Customer {customer_id}")
     deleted_customer = crud.delete_customer(db, customer_id)
     if deleted_customer is None:
-        logger.warning(f"Customer not found for delete: {customer_id}")
+        logger.warning(f"Customer not found for deletion: {customer_id}")
         raise HTTPException(status_code=404, detail="Customer not found")
-    return deleted_customer
+    return {"message": f"Customer {customer_id} deleted successfully"}
