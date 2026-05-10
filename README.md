@@ -23,7 +23,7 @@ A professional-grade FastAPI implementation of the ClassicModels database. This 
 
 1.  **Clone the Repository**:
     ```bash
-    git clone <your-repo-link>
+    git clone <use this repo link>
     cd classicmodels-api
     ```
 
