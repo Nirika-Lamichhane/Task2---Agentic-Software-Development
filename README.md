@@ -59,6 +59,13 @@ You can verify the concurrent execution in your Docker logs:
 | :--- | :--- | :--- |
 | `GET` | `/overall_counts` | **Aggregated concurrent count** of all tables. |
 | `GET` | `/customers/count` | Individual customer count. |
+| `GET` | `/orders/count` | Individual customer count. |
+| `GET` | `/employees/count` | Individual customer count. |
+| `GET` | `/products/count` | Individual customer count. |
+| `GET` | `/offices/count` | Individual customer count. |
+| `GET` | `/payments/count` | Individual customer count. |
+| `GET` | `/orderdetails/count` | Individual customer count. |
+| `GET` | `/productlines/count` | Individual customer count. |
 | `GET` | `/customers/` | List all customers with pagination. |
 | `POST` | `/customers/` | Create a new customer record. |
 | `GET` | `/customers/{id}` | Retrieve specific customer details by ID. |
